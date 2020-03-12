@@ -1,6 +1,40 @@
-## Find Lat and Long at:
+# Map.io
 
-https://www.latlong.net/
+Map.io a bing maps based application.
 
-## react map gl key
-pk.eyJ1IjoiYW51c2hrdW1hciIsImEiOiJjazc5NHR0aWYwbG9qM2VueXUwb2ZzOTRzIn0.qALP6cZH4S7jXYv9hoHHvA
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+What things you need to install the software and how to install them
+
+1) React js: 
+
+      -ubuntu: https://www.zeolearn.com/magazine/setup-react-ubuntu
+
+      -windows:  https://www.liquidweb.com/kb/install-react-js-windows/
+
+### Installing
+
+After installing react on your computer, open it using terminal and install the dependencies needed.
+
+```
+npm install
+```
+## Built With
+
+* [ReactJs](https://reactjs.org/) - The Javascript Library used
+
+## Authors
+
+* **Anush kumar N** - *Initial work* - [Anushkumar06](https://github.com/Anushkumar06)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+* Inspiration - Google maps.
+* Hats - stackoverflow
