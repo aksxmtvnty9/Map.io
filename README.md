@@ -37,4 +37,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 * Inspiration - Google maps.
-* Hats - stackoverflow
+* Help - [iniamudhan](https://github.com/iniamudhan/react-bingmaps/blob/dev/src/App.js)
