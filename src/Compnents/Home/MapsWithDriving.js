@@ -5,8 +5,6 @@ import carLeft from '../../Assets/car-left.png';
 import carRight from '../../Assets/car-right.png';
 import carDown from '../../Assets/car-down.png';
 
-const KEY ="AoVMH4fhTFyAXxfjqNVBvLYjGjOxCYN8llWIud4Ro0CgtJ_2b379XxIP3XZsEmT1";
-
 export default function MapWithDriving(props) {
     const latLong = [11.790640708130752, 78.09182189856892]   
     const [cars,setCars] = useState([11.0018115,76.9628425])
@@ -41,78 +39,33 @@ export default function MapWithDriving(props) {
 
     const renderMaps = useCallback(
         () => {
-            if(direction === "up")
-                return <ReactBingmaps 
-                            bingmapKey = {KEY}
-                            center = {latLong}
-                            zoom = {8}
-                            pushPins = {
-                                [
-                                    {
-                                    "location":cars, "option":{ icon: car }
-                                    }
-                                ]
-                            }
-                            getLocation = {
-                                {addHandler: "click", callback:addPushPinOnClick}
-                            }
-                            
-                        > 
-                        </ReactBingmaps>
-            if(direction === "down")
-                return <ReactBingmaps 
-                            bingmapKey = {KEY}
-                            center = {latLong}
-                            zoom = {8}
-                            pushPins = {
-                                [
-                                    {
-                                    "location":cars, "option":{ icon: carDown }
-                                    }
-                                ]
-                            }
-                            getLocation = {
-                                {addHandler: "click", callback:addPushPinOnClick}
-                            }
-                            
-                        > 
-                        </ReactBingmaps>
-            if(direction === "left")
-                return <ReactBingmaps 
-                            bingmapKey = {KEY}
-                            center = {latLong}
-                            zoom = {8}
-                            pushPins = {
-                                [
-                                    {
-                                    "location":cars, "option":{ icon: carLeft }
-                                    }
-                                ]
-                            }
-                            getLocation = {
-                                {addHandler: "click", callback:addPushPinOnClick}
-                            }
-                            
-                        > 
-                        </ReactBingmaps>
-            if(direction === "right")
-                return <ReactBingmaps 
-                            bingmapKey = {KEY}
-                            center = {latLong}
-                            zoom = {8}
-                            pushPins = {
-                                [
-                                    {
-                                    "location":cars, "option":{ icon: carRight }
-                                    }
-                                ]
-                            }
-                            getLocation = {
-                                {addHandler: "click", callback:addPushPinOnClick}
-                            }
-                            
-                        > 
-                        </ReactBingmaps>
+            let vehicle;
+            if (direction === "up")
+                vehicle = car
+            if (direction === "down")
+                vehicle = carDown
+            if (direction === "left")
+                vehicle = carLeft
+            if (direction === "right")
+                vehicle = carRight
+                
+            return <ReactBingmaps 
+                        bingmapKey = {process.env.REACT_APP_BINGMAPS_KEY}
+                        center = {latLong}
+                        zoom = {8}
+                        pushPins = {
+                            [
+                                {
+                                "location":cars, "option":{ icon: vehicle }
+                                }
+                            ]
+                        }
+                        getLocation = {
+                            {addHandler: "click", callback:addPushPinOnClick}
+                        }
+                        
+                    > 
+                    </ReactBingmaps>
         },
         [cars,direction,latLong],
     )
@@ -122,7 +75,7 @@ export default function MapWithDriving(props) {
     }
 
     return (
-        <div style={{width:"85vw",height:"100vh"}}>
+        <div className="realtime-map">
             {renderMaps()}
         </div>
     )

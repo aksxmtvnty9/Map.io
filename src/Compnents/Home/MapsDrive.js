@@ -45,7 +45,7 @@ export default function MapsDrive() {
         else
             return (
                 <div className="main-content">
-                    <div className="left-section" style={{width:"15vw"}}>
+                    <div className="left-section small-width">
                         <div className="name-section">
                             <p>{name}</p>
                         </div>

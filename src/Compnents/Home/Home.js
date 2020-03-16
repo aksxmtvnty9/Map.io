@@ -5,8 +5,6 @@ import EmptyMap from './EmptyMap'
 import Axios from 'axios';
 
 
-const BING_MAPS_KEY ="AoVMH4fhTFyAXxfjqNVBvLYjGjOxCYN8llWIud4Ro0CgtJ_2b379XxIP3XZsEmT1";
-
 export default function Home() {
     const [name, setName] = useState("");
     const history = useHistory();
@@ -48,9 +46,9 @@ export default function Home() {
             if(flag){
                 let points= [];
                 if(latLong.length < 1){
-                    console.log("no lat long")
+                    // console.log("no lat long")
                     if(latLongI.length > 1 ){
-                        console.log("latlongI avail")
+                        // console.log("latlongI avail")
                         points = [
                             {
                                 "location": flag?latLongI:""
@@ -71,9 +69,9 @@ export default function Home() {
                         ]
                 }
                 else if(latLong.length > 1){
-                    console.log("latlong avail",flag,latLong)
+                    // console.log("latlong avail",flag,latLong)
                     if(latLongI.length > 1 ){
-                        console.log("latlongI avail")
+                        // console.log("latlongI avail")
                         points = [
                             {
                                 "location": flag?latLongI:""
@@ -99,6 +97,7 @@ export default function Home() {
             else   
                 return <EmptyMap  setDest={setLatLong}/>
         },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [flag,dest],
     )
     const renderRoute = useCallback(
@@ -119,18 +118,20 @@ export default function Home() {
             prev[event.target.name] = event.target.value;
             return prev
         })
-        setTimeout(() => {
+        setTimeout(async () => {
             if(dest.start.length > 0 && event.target.name === "start")
-                Axios.get(`http://dev.virtualearth.net/REST/v1/Autosuggest?query=${dest.start}&includeEntityTypes=place&maxResults=10&key=${BING_MAPS_KEY}`)
+                await Axios.get(`${process.env.REACT_APP_BINGMAPS_AUTOSUGGEST_API_1}${dest.start}${process.env.REACT_APP_BINGMAPS_AUTOSUGGEST_API_2}${process.env.REACT_APP_BINGMAPS_KEY}`)
                 .then(res=>{
                     // console.log(res.data.resourceSets[0].resources[0].value)
+                    setOptionStart([])
                     setOptionStart(res.data.resourceSets[0].resources[0].value)
                 })
             if(dest.end.length > 0 && event.target.name === "end")
-                Axios.get(`http://dev.virtualearth.net/REST/v1/Autosuggest?query=${dest.end}&includeEntityTypes=place&maxResults=10&key=${BING_MAPS_KEY}`)
+                await Axios.get(`${process.env.REACT_APP_BINGMAPS_AUTOSUGGEST_API_1}${dest.end}${process.env.REACT_APP_BINGMAPS_AUTOSUGGEST_API_2}${process.env.REACT_APP_BINGMAPS_KEY}`)
                 .then(res=>{
                     // console.log(res.data.resourceSets[0].resources[0].value)
                     // setLatLong([])
+                    setOptionEnd([])
                     setOptionEnd(res.data.resourceSets[0].resources[0].value)
                 })
             // console.log(dest)

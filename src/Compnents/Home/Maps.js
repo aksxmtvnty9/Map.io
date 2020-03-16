@@ -5,11 +5,6 @@ import bus from '../../Assets/bus.png'
 import marker from '../../Assets/marker.png'
 import axios from 'axios';
 
-const HERE_MAPS_KEY ="9a8Wc3VJvFHLF4I2s8Sisj_c2kfQE7ppvF4lzgtmO0I";
-const KEY ="AoVMH4fhTFyAXxfjqNVBvLYjGjOxCYN8llWIud4Ro0CgtJ_2b379XxIP3XZsEmT1";
-const CAR = "CAR"
-const PUBLIC_TRANSPORT = "PUBLIC_TRANSPORT"
-
 export default function Map(props) {
     const latLong = [11.790640708130752, 78.09182189856892]   
     const [cars,setCars] = useState([11.0018115,76.9628425])
@@ -123,8 +118,9 @@ export default function Map(props) {
     }
 
     async function getRoute(data,mode){
-        if(mode === CAR){
-            await axios.get(`https://route.ls.hereapi.com/routing/7.2/calculateroute.json?waypoint0=${gps[0]}%2C${gps[1]}&waypoint1=${data[0]}%2C${data[1]}&mode=fastest%3Bcar%3Btraffic%3Aenabled&departure=now&alternatives=1&apiKey=${HERE_MAPS_KEY}`)
+        const car="car",truck="truck";
+        if(mode === process.env.REACT_APP_CAR){
+            await axios.get(`${process.env.REACT_APP_HERE_MAPS_API_1}${gps[0]}${process.env.REACT_APP_HERE_MAPS_API_2}${gps[1]}${process.env.REACT_APP_HERE_MAPS_API_3}${data[0]}${process.env.REACT_APP_HERE_MAPS_API_2}${data[1]}${process.env.REACT_APP_HERE_MAPS_API_4}${car}${process.env.REACT_APP_HERE_MAPS_API_5}${process.env.REACT_APP_HEREMAPS_KEY}`)
             .then(res=>{
                 setRoutes([])
                 console.log(res.data.response.route)
@@ -141,8 +137,8 @@ export default function Map(props) {
                 console.log(err.message)
             })
         }
-        if(mode === PUBLIC_TRANSPORT){
-            await axios.get(`https://route.ls.hereapi.com/routing/7.2/calculateroute.json?waypoint0=${gps[0]}%2C${gps[1]}&waypoint1=${data[0]}%2C${data[1]}&mode=fastest%3Btruck%3Btraffic%3Aenabled&departure=now&alternatives=1&apiKey=${HERE_MAPS_KEY}`)
+        if(mode === process.env.REACT_APP_PUBLIC_TRANSPORT){
+            await axios.get(`${process.env.REACT_APP_HERE_MAPS_API_1}${gps[0]}${process.env.REACT_APP_HERE_MAPS_API_2}${gps[1]}${process.env.REACT_APP_HERE_MAPS_API_3}${data[0]}${process.env.REACT_APP_HERE_MAPS_API_2}${data[1]}${process.env.REACT_APP_HERE_MAPS_API_4}${truck}${process.env.REACT_APP_HERE_MAPS_API_5}${process.env.REACT_APP_HEREMAPS_KEY}`)
             .then(res=>{
                 setRoutes([])
                 console.log(res.data.response.route)
@@ -162,9 +158,9 @@ export default function Map(props) {
     }
 
     return (
-        <div style={{width:"85vw",height:"100vh"}}>
+        <div className="realtime-map">
             <ReactBingmaps 
-            bingmapKey = {KEY}
+            bingmapKey = {process.env.REACT_APP_BINGMAPS_KEY}
             center = {latLong}
             zoom = {8}
             pushPins = {

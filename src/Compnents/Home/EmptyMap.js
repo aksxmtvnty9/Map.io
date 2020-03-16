@@ -1,8 +1,6 @@
 import React from "react";
 import { ReactBingmaps } from 'react-bingmaps';
 
-const KEY ="AoVMH4fhTFyAXxfjqNVBvLYjGjOxCYN8llWIud4Ro0CgtJ_2b379XxIP3XZsEmT1";
-
 export default function Map(props) {
     const latLong = [11.790640708130752, 78.09182189856892]
 
@@ -16,9 +14,9 @@ export default function Map(props) {
     }
 
     return (
-        <div style={{width:"70vw",height:"100vh"}}>
+        <div className="empty-map">
             <ReactBingmaps 
-            bingmapKey = {KEY}
+            bingmapKey = {process.env.REACT_APP_BINGMAPS_KEY}
             center = {latLong}
             zoom = {8}
             getLocation = {

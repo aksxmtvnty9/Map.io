@@ -421,14 +421,40 @@ ul , li {
 	color: floralwhite;
 	padding: 10px;
 	top: -50px;
-	font-weight: 600;
+	font-weight: 800;
 	border-radius: 3px;
-	left: 55vw;
+	left: 31vw;
 	position: absolute;
-	background-color: tomato;
+	background-color: rgba(255, 99, 71, 0.699);
 	z-index: 10000 !important;
 	transition: top 0.2s;
 }
 .visible{
 	top: 10px;
+}
+.overlay2{
+	color: black;
+	padding: 10px;
+	bottom: 0;
+	font-weight: 800;
+	border-radius: 3px;
+	right: 1vw;
+	position: absolute;
+	background-color: rgba(126, 252, 0, 0.719);
+	z-index: 10000 !important;
+	transition: top 0.2s;
+}
+.visible2{
+	bottom: 10px;
+}
+.empty-map{
+	width: 70vw;
+	height: 100vh;
+}
+.realtime-map{
+	width: 85vw;
+	height: 100vh;
+}
+.small-width{
+	width: 15vw;
 }
