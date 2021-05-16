@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,7 +13,7 @@ import Container from '@material-ui/core/Container';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -28,7 +28,7 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -51,64 +51,75 @@ const useStyles = makeStyles(theme => ({
 export default function SignIn() {
   const classes = useStyles();
   const history = useHistory();
-  const alertError = (text) => toast.error(text, {
-    position: toast.POSITION.TOP_RIGHT
+  const alertError = (text) =>
+    toast.error(text, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+
+  const [loginCredentials, setLoginCredentials] = useState({
+    userId: '',
+    password: '',
   });
 
-  const [loginCredentials,setLoginCredentials] = useState({
-    userId:"",
-    password:""
-  })
-
   useEffect(() => {
+    document.title = 'Sign In | Welcome to Map.io';
     return () => {
       setLoginCredentials({
-        userId:"",
-        password:""
-      })
+        userId: '',
+        password: '',
+      });
     };
-  }, [])
+  }, []);
 
-  function handleLoginDetails(event){
-    event.persist()
-    setLoginCredentials({...loginCredentials,[event.target.name]:event.target.value})
+  function handleLoginDetails(event) {
+    event.persist();
+    setLoginCredentials({
+      ...loginCredentials,
+      [event.target.name]: event.target.value,
+    });
   }
 
-  function handleLogin(event){
-    event.preventDefault()
+  function handleLogin(event) {
+    event.preventDefault();
     const users = JSON.parse(localStorage.getItem('Users'));
     // console.log(loginCredentials)
-    if(users){
-      const currentUser = users.filter(items=>{
-        return items.userName === loginCredentials.userId || items.email === loginCredentials.userId?items:""
-      })
+    if (users) {
+      const currentUser = users.filter((items) => {
+        return items.userName === loginCredentials.userId ||
+          items.email === loginCredentials.userId
+          ? items
+          : '';
+      });
       // console.log(currentUser)
-      if(currentUser.length > 0){
-        if(currentUser[0].password === loginCredentials.password){
+      if (currentUser.length > 0) {
+        if (currentUser[0].password === loginCredentials.password) {
           // console.log("have fun")
-          localStorage.setItem("token",JSON.stringify({token:currentUser[0].userName,name:currentUser[0].name}));
-          history.push("/home")
-        }
-        else{
+          localStorage.setItem(
+            'token',
+            JSON.stringify({
+              token: currentUser[0].userName,
+              name: currentUser[0].name,
+            })
+          );
+          history.push('/home');
+        } else {
           // console.log("no no your are not allowed")
-          alertError("Oh gosh password's wrong")
+          alertError("Oh gosh password's wrong");
         }
-      }
-      else{
+      } else {
         // console.log("please register and try")
-        alertError("You must register first")
+        alertError('You must register first');
         setLoginCredentials({
-          userId:"",
-          password:""
-        })
+          userId: '',
+          password: '',
+        });
       }
-    }
-    else{
-      alertError("You must register first")
+    } else {
+      alertError('You must register first');
       setLoginCredentials({
-        userId:"",
-        password:""
-      })
+        userId: '',
+        password: '',
+      });
     }
   }
 
@@ -166,7 +177,13 @@ export default function SignIn() {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" onClick={()=>{history.push("/signup")}} variant="body2">
+              <Link
+                href="#"
+                onClick={() => {
+                  history.push('/signup');
+                }}
+                variant="body2"
+              >
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
