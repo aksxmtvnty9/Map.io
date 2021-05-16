@@ -1,5 +1,4 @@
 # Map.io
-[![Netlify Status](https://api.netlify.com/api/v1/badges/7f320a21-2e46-4254-9a24-9c6adb87357e/deploy-status)](https://app.netlify.com/sites/mapio/deploys)
 
 Map.io a bing maps based application.
 
